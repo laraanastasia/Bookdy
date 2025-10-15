@@ -35,7 +35,7 @@ First things first\! The oracle needs to get to know you.
 1.  Go to [Goodreads](https://www.goodreads.com/review/import).
 2.  Click on **"Export Library"** and wait for the download link to appear.
 3.  Download the `csv` file.
-4.  **IMPORTANT:** Rename the file to `goodreads_library_export.csv` and place it in the `data` folder of this project.
+4.  **IMPORTANT:** Rename the file to `goodreads_library_export.csv`. Create a folder `data` at the root of your project and place the file inside.
 
 ### Step 2: Your Cozy Reading Nook (Installation)
 
