@@ -3,3 +3,4 @@
 __pycache__/
 goodreads_library_export.csv
 my_book_vectorstore/
+viz/author_graph.html
