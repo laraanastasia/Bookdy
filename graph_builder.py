@@ -2,18 +2,6 @@ import pandas as pd
 import networkx as nx
 
 def build_knowledge_graph(df: pd.DataFrame):
-    """
-    Baut einen Knowledge Graphen aus dem Goodreads-DataFrame.
-
-    Nodes:
-    - User (zentraler Knoten)
-    - Author
-    - Book
-
-    Edges:
-    - (User) -> (Book) mit Attributen wie 'rating' und 'shelf'
-    - (Author) -> (Book) als 'WROTE' Beziehung
-    """
     G = nx.Graph()
     user_node = "You"
     G.add_node(user_node, type="user", color="#FFD700") 

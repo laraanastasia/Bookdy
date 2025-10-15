@@ -1,92 +1,91 @@
 # 🔮✨ My Bookish Oracle ✨🔮
 
-Hallo, liebe Leseratte\! 🌸 Fühlst du dich auch manchmal von deinem endlosen SuB überfordert? Du stehst vor einem neuen, glänzenden Buch, liest den Klappentext und fragst dich: "Werden wir Seelenverwandte sein oder werde ich es nach 50 Seiten abbrechen?"
+Hello, dear bookworm\! 🌸 Do you sometimes feel overwhelmed by your endless TBR pile? You stand before a new, shiny book, read the blurb, and ask yourself: "Will we be soulmates, or will I DNF it after 50 pages?"
 
-Keine Sorge mehr\! Diese kleine App ist deine persönliche Buch-Wahrsagerin, dein literarisches Orakel und deine neue beste Freundin bei der Entscheidung, welches Buch als Nächstes dein Herz erobern darf. Sie kennt deine Seele (oder zumindest deine Goodreads-Bibliothek 😉) und gibt dir eine magische Vorhersage\!
+Worry no more\! This little app is your personal book fortune-teller, your literary oracle, and your new best friend in deciding which book gets to conquer your heart next. It knows your soul (or at least your Goodreads library 😉) and gives you a magical prediction\!
 
-## Was diese kleine Zauber-App für dich tun kann
+## What this little magic app can do for you
 
-Diese App hat zwei magische Seiten, genau wie dein Lieblingsbuch:
+This app has two magical sides, just like your favorite book:
 
-### 📚 Die Kristallkugel (RAG-Empfehlung)
+### 📚 The Crystal Ball (RAG Recommendation)
 
-Gib den Klappentext eines Buches ein, das dich anlacht. Unsere App schaut tief in die Seiten deiner bisherigen Leseabenteuer, findet die Bücher, die ihm am ähnlichsten sind, und befragt dann eine weise KI (deinen persönlichen Buch-Geist\!), ob dieses neue Buch dir gefallen wird.
+Enter the blurb of a book that's calling to you. Our app looks deep into the pages of your past reading adventures, finds the books most similar to it, and then consults a wise AI (your personal book spirit\!) to predict whether you will like this new book.
 
-- **Personalisierte Analyse:** Erhalte eine liebevoll formulierte Vorhersage, die auf DEINEN Vorlieben basiert.
-- **Intelligentes Ranking:** Bücher, die du mit 5 Sternen bewertet hast, haben mehr Gewicht. Bücher, die du abgebrochen hast (DNF), werden als Warnung gesehen. So wird die Vorhersage noch genauer\!
-- **Vollkommene Transparenz:** Sieh genau, welche Bücher aus deiner Vergangenheit für die Vorhersage herangezogen wurden.
+- **Personalized Analysis:** Receive a lovingly crafted prediction based on YOUR preferences.
+- **Intelligent Ranking:** Books you've rated with 5 stars carry more weight. Books you've abandoned (DNF) are seen as a warning. This makes the prediction even more accurate\!
+- **Complete Transparency:** See exactly which books from your past were used to make the prediction.
 
-### 🕸️ Die Autoren-Konstellation (Knowledge Graph Analyse)
+### 🕸️ The Author Constellation (Knowledge Graph Analysis)
 
-Hast du dich je gefragt, ob du und ein bestimmter Autor einfach "klicken"? Dieser Teil der App zeichnet eine wunderschöne Sternenkarte deiner Beziehung zu einem Autor.
+Have you ever wondered if you and a certain author just "click"? This part of the app draws a beautiful star map of your relationship with an author.
 
-- **Wähle einen Autor:** Such dir jemanden aus deiner Leseliste aus.
-- **Visuelle Magie:** Sieh ein interaktives Netz, das dich, den Autor und all seine Bücher, die du gelesen hast, miteinander verbindet. Jeder Knotenpunkt erzählt eine Geschichte über deine Bewertungen und Gefühle.
-- **Klare Entscheidungshilfe:** Eine textliche Analyse verrät dir, ob es eine gute Idee ist, ein weiteres Buch dieses Autors auf deine Wunschliste zu setzen.
+- **Choose an Author:** Pick someone from your reading list.
+- **Visual Magic:** See an interactive web that connects you, the author, and all of their books that you've read. Each node tells a story about your ratings and feelings.
+- **Clear Decision Support:** A text analysis tells you whether it's a good idea to add another book by this author to your wishlist.
 
-## Wie du dein eigenes Lese-Orakel zum Leben erweckst
+## How to bring your own Reading Oracle to life
 
-Folge diesen Schritten, um deine persönliche Lese-Magie zu entfesseln. Es ist ein bisschen wie ein Ritual bei Kerzenschein und Tee\! ☕️
+Follow these steps to unleash your personal reading magic. It's a bit like a ritual with candlelight and tea\! ☕️
 
-### Schritt 1: Dein persönliches Lese-Tagebuch (Goodreads-Daten)
+### Step 1: Your Personal Reading Journal (Goodreads Data)
 
-Das Wichtigste zuerst\! Das Orakel muss dich kennenlernen.
+First things first\! The oracle needs to get to know you.
 
-1.  Gehe zu [Goodreads](https://www.goodreads.com/review/import).
-2.  Klicke auf **"Export Library"** und warte, bis der Link zum Herunterladen erscheint.
-3.  Lade die `csv`-Datei herunter.
-4.  **WICHTIG:** Benenne die Datei in `goodreads_library_export.csv` um und lege sie in den `data` Ordner dieses Projekts.
+1.  Go to [Goodreads](https://www.goodreads.com/review/import).
+2.  Click on **"Export Library"** and wait for the download link to appear.
+3.  Download the `csv` file.
+4.  **IMPORTANT:** Rename the file to `goodreads_library_export.csv` and place it in the `data` folder of this project.
 
-### Schritt 2: Dein gemütlicher Lese-Winkel (Installation)
+### Step 2: Your Cozy Reading Nook (Installation)
 
-Bereiten wir alles für einen gemütlichen Programmier-Nachmittag vor.
+Let's prepare everything for a cozy programming afternoon.
 
-1.  **Python-Magie:** Stelle sicher, dass du Python 3.9 oder höher installiert hast.
-2.  **Virtuelle Blase:** Es ist immer eine gute Idee, in einer sauberen Umgebung zu arbeiten. Erstelle ein virtuelles Environment:
+1.  **Python Magic:** Make sure you have Python 3.9 or higher installed.
+2.  **Virtual Bubble:** It's always a good idea to work in a clean environment. Create a virtual environment:
     ```bash
     python -m venv .venv
-    source .venv/bin/activate  # Auf Windows: .venv\Scripts\activate
+    source .venv/bin/activate
     ```
-3.  **Die Zaubersprüche (Abhängigkeiten installieren):** Installiere alle benötigten Pakete mit diesem einen, magischen Befehl:
+3.  **The Magic Spells (Install Dependencies):** Install all the necessary packages with this one magic command:
     ```bash
     pip install -r requirements.txt
     ```
-    _(Falls keine `requirements.txt` da ist, musst du sie mit den importierten Modulen wie `streamlit`, `pandas`, `langchain`, `ollama` usw. erstellen.)_
 
-### Schritt 3: Den Buch-Geist herbeirufen (Lokales LLM mit Ollama)
+### Step 3: Summon the Book Spirit (Local LLM with Ollama)
 
-Unsere App braucht ein kluges Köpfchen im Hintergrund. Wir nutzen dafür Ollama – das ist super einfach\!
+Our app needs a clever mind in the background. We use Ollama for this – it's super easy\!
 
-1.  **Installiere Ollama:** Lade es von [ollama.com](https://ollama.com/) herunter und installiere es.
-2.  **Rufe die Geister herbei:** Öffne dein Terminal und führe diese beiden Befehle aus, um die KI-Modelle herunterzuladen, die wir brauchen. (Das dauert einen Moment, also mach dir ruhig einen Tee\!)
+1.  **Install Ollama:** Download it from [ollama.com](https://ollama.com/) and install it.
+2.  **Summon the Spirits:** Open your terminal and run these two commands to download the AI models we need. (This will take a moment, so feel free to make a cup of tea\!)
     ```bash
     ollama pull llama3
     ollama pull nomic-embed-text
     ```
 
-### Schritt 4: Das große Einweihungs-Ritual (Daten verarbeiten)
+### Step 4: The Grand Inauguration Ritual (Process Data)
 
-Bevor wir die App starten können, müssen wir dem Orakel all deine Bücher beibringen. Dieser Schritt liest deine Goodreads-Datei und verwandelt sie in magisches Wissen.
-**Führe diesen Befehl nur einmal aus (oder immer dann, wenn du deine Goodreads-Liste aktualisiert hast):**
+Before we can start the app, we need to teach the oracle about all your books. This step reads your Goodreads file and transforms it into magical knowledge.
+**Run this command only once (or whenever you have updated your Goodreads list):**
 
 ```bash
 python ingest.py
 ```
 
-Hab etwas Geduld, hier passiert die wahre Alchemie\! ✨
+Be patient, this is where the real alchemy happens\! ✨
 
-### Schritt 5: Öffne das Portal\! (App starten)
+### Step 5: Open the Portal\! (Start the App)
 
-Alles ist bereit\! Zeit, die Magie zu entfesseln.
+Everything is ready\! Time to unleash the magic.
 
 ```bash
 streamlit run app.py
 ```
 
-Dein Browser sollte sich nun mit deiner wunderschönen, persönlichen Buch-Empfehlungs-App öffnen\!
+Your browser should now open with your beautiful, personal book recommendation app\!
 
 ---
 
-Viel Spaß beim Entdecken deines nächsten Lieblingsbuchs\! Mögen deine Seiten niemals kleben und deine Lesezeit niemals enden. 💖📖
+Have fun discovering your next favorite book\! May your pages never stick together and your reading time never end. 💖📖
 
 **Happy Reading\!**

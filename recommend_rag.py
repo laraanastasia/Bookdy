@@ -8,10 +8,6 @@ from langchain.docstore.document import Document
 from functools import lru_cache
 
 def hybrid_rerank(retrieved_docs_with_scores: list, rating_boost: float, dnf_penalty: float) -> list[Document]:
-    """
-    Reranks documents by adjusting their L2 distance scores based on metadata.
-    A lower score is better (more similar).
-    """
     reranked_results = []
     
     for doc, score in retrieved_docs_with_scores:
@@ -39,7 +35,6 @@ def hybrid_rerank(retrieved_docs_with_scores: list, rating_boost: float, dnf_pen
 
 @lru_cache(maxsize=1) 
 def get_vectorstore(persist_dir: str, embed_model: str):
-    """Initializes and caches the embedding model and vector store."""
     if not os.path.exists(persist_dir):
         raise FileNotFoundError(f"Vector store not found at '{persist_dir}'. Run ingest.py first.")
         
@@ -56,10 +51,6 @@ def get_recommendation(
     rating_boost: float = 0.3,
     dnf_penalty: float = 0.4
 ):
-    """
-    Executes the RAG process with robust logic to find and pin DNF books
-    even if they are not the #1 retrieval result.
-    """
     vectorstore = get_vectorstore(persist_dir, embed_model)
     initial_candidates_with_scores = vectorstore.similarity_search_with_score(query=blurb, k=20)
     

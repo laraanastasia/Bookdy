@@ -3,9 +3,6 @@ from pyvis.network import Network
 import os
 
 def get_author_analysis(graph: nx.Graph, author_name: str):
-    """
-    Analysiert die Beziehung des Nutzers zu einem bestimmten Autor im Graphen.
-    """
     if not graph.has_node(author_name):
         return {
             "explanation": f"Der Autor '{author_name}' wurde in deiner Lesehistorie nicht gefunden.",
@@ -18,7 +15,6 @@ def get_author_analysis(graph: nx.Graph, author_name: str):
     dnf_books = 0
 
     for book_node in graph.neighbors(author_name):
-        # Überprüfe, ob der Nutzer dieses Buch gelesen hat
         if graph.has_edge("You", book_node):
             edge_data = graph.get_edge_data("You", book_node)
             book_info = {
@@ -67,9 +63,6 @@ def get_author_analysis(graph: nx.Graph, author_name: str):
 
 
 def visualize_author_subgraph(graph: nx.Graph, author_name: str, file_path="graph.html"):
-    """
-    Erstellt eine interaktive Visualisierung des Subgraphen für einen Autor.
-    """
     if not graph.has_node(author_name):
         return None
 

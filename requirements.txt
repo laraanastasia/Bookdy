@@ -6,3 +6,5 @@ chromadb
 tqdm
 streamlit
 dotenv
+networkx
+pyvis
