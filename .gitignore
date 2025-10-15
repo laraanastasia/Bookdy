@@ -2,4 +2,4 @@
 .venv/
 __pycache__/
 goodreads_library_export.csv
-my_book_vector_store/
+my_book_vectorstore/
