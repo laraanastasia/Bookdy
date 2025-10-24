@@ -16,14 +16,6 @@ Enter the blurb of a book that's calling to you. Our app looks deep into the pag
 - **Intelligent Ranking:** Books you've rated with 5 stars carry more weight. Books you've abandoned (DNF) are seen as a warning. This makes the prediction even more accurate\!
 - **Complete Transparency:** See exactly which books from your past were used to make the prediction.
 
-### 🕸️ The Author Constellation (Knowledge Graph Analysis)
-
-Have you ever wondered if you and a certain author just "click"? This part of the app draws a beautiful star map of your relationship with an author.
-
-- **Choose an Author:** Pick someone from your reading list.
-- **Visual Magic:** See an interactive web that connects you, the author, and all of their books that you've read. Each node tells a story about your ratings and feelings.
-- **Clear Decision Support:** A text analysis tells you whether it's a good idea to add another book by this author to your wishlist.
-
 ## How to bring your own Reading Oracle to life
 
 Follow these steps to unleash your personal reading magic. It's a bit like a ritual with candlelight and tea\! ☕️

@@ -1,6 +1,5 @@
 persist_dir: "my_book_vectorstore"
 chat_model: "llama3.1"
 embed_model: "nomic-embed-text"
-goodreads_csv_path: "data/goodreads_library_export.csv"
-graph_viz_path: "viz/author_graph.html"
+goodreads_csv_path: "utils/goodreads_with_blurbs.csv"
 k: 5

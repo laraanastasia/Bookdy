@@ -53,25 +53,22 @@ def get_recommendation(
 ):
     vectorstore = get_vectorstore(persist_dir, embed_model)
     initial_candidates_with_scores = vectorstore.similarity_search_with_score(query=blurb, k=20)
-    
     if not initial_candidates_with_scores:
         return {"explanation": "Keine relevanten Bücher in der Lesehistorie gefunden.", "contexts": []}
 
     pinned_dnf_doc = None
-    remaining_candidates = list(initial_candidates_with_scores) # Kopie erstellen
+    remaining_candidates = list(initial_candidates_with_scores) 
 
     for i, (doc, score) in enumerate(initial_candidates_with_scores[:5]):
         shelf = doc.metadata.get("shelf", "").lower()
         if 'dnf' in shelf or 'did-not-finish' in shelf:
             pinned_dnf_doc = doc
             pinned_dnf_doc.metadata['is_pinned_match'] = True
-            
             remaining_candidates.pop(i) 
             break 
 
     final_context_docs = []
     if pinned_dnf_doc:
-
         reranked_others = hybrid_rerank(
             remaining_candidates, 
             rating_boost=rating_boost, 
@@ -89,17 +86,52 @@ def get_recommendation(
     if not final_context_docs:
         return {"explanation": "Keine relevanten Bücher in der Lesehistorie gefunden.", "contexts": []}
 
-    context_string = "\n---\n".join([doc.page_content for doc in final_context_docs])
+    context_strings = []
+    for doc in final_context_docs:
+        meta = doc.metadata
+        parts = []
+        
+        if meta.get('user_verdict'):
+            parts.append(meta['user_verdict'])
+            
+        parts.append(f"Title: {meta.get('title', 'N/A')}")
+        parts.append(f"Author: {meta.get('author', 'N/A')}")
+        
+        if meta.get('clean_blurb'):
+            parts.append(f"Official Blurb: {meta.get('clean_blurb')}")
+        
+        if meta.get('rating', 0) > 0:
+            parts.append(f"My Rating: I rated this book {meta.get('rating')} out of 5 stars.")
+        else:
+            parts.append("My Rating: I have not rated this book.")
+
+        shelf = meta.get('shelf', 'unknown')
+        if shelf in ['dnf', 'did-not-finish']:
+            parts.append(f"Shelf Status: I did not finish this book (DNF).")
+        elif shelf == 'to-read':
+             parts.append(f"Shelf Status: This book is on my 'to-read' list.")
+        else:
+            parts.append(f"Shelf Status: I have read this book.")
+
+        if meta.get('my_review'):
+            parts.append(f"My Personal Review: {meta.get('my_review')}")
+        elif shelf != 'to-read':
+            parts.append("My Personal Review: I did not write a review.")
+            
+        context_strings.append("\n".join(parts))
+    
+    context_string = "\n---\n".join(context_strings)
     
     template = """
     You are a brutally honest personalized book analysis assistant. Your task is to predict if a user will like a new book based on their reading history.
-    Your analysis must be direct and based ONLY on the evidence provided in the context. Answer in German.
+    Your analysis must be direct and based ONLY on the evidence provided in the context.
 
     **CRITICAL ANALYSIS RULES:**
-    1.  **THE RATING IS TRUTH:** The user's star rating (`My Rating`) and shelf status (`Shelf Status`) are the ultimate source of truth. A 4 or 5-star rating is ALWAYS a positive signal, regardless of any critical comments in the review. A 'DNF' (Did Not Finish) status is the STRONGEST POSSIBLE NEGATIVE signal.
-    2.  **DNF IS LAW:** If the context contains a DNF book that is similar to the new book (especially if it is marked as a 'pinned match'), you MUST predict the user will NOT like the new book. Your primary reason MUST be the existence of this DNF book.
-    3.  **REASONING:** Base your conclusion entirely on the user's explicit ratings and shelf status. Compare themes and genres, but always tie it back to the user's final opinion (rating/DNF).
-    4.  **VERDICT:** Conclude with a clear, unambiguous verdict: "Wahrscheinlich wirst du dieses Buch mögen." or "Wahrscheinlich wirst du dieses Buch NICHT mögen."
+    1.  **THE RATING IS TRUTH:** The user's star rating (`My Rating`) and shelf status (`Shelf Status`) are the ultimate source of truth. A 4 or 5-star rating is ALWAYS a very positive signal. A 'DNF' (Did Not Finish) status is the STRONGEST POSSIBLE NEGATIVE signal.
+    2.  **DNF IS LAW:** If the context contains a DNF book (especially a 'pinned match'), you MUST prioritize this. If the blurbs are similar, predict the user will NOT like the new book and state this as the primary reason.
+    3.  **COMPARE BLURBS:** Explicitly compare the **NEW BOOK BLURB** to the **Official Blurb** in the context to find thematic, plot, or stylistic similarities.
+    4.  **REASONING:** Base your conclusion entirely on the user's explicit ratings and shelf status, combined with the blurb comparison.
+    5.  **VERDICT:** Conclude with a clear, unambiguous verdict: "You will like this book" or "You will NOT like this book."
 
     **NEW BOOK BLURB:** {query}
 
