@@ -35,7 +35,7 @@ First things first\! The oracle needs to get to know you.
 1.  Go to [Goodreads](https://www.goodreads.com/review/import).
 2.  Click on **"Export Library"** and wait for the download link to appear.
 3.  Download the `csv` file.
-4.  **IMPORTANT:** Rename the file to `goodreads_library_export.csv`. Create a folder `data` at the root of your project and place the file inside.
+4.  **IMPORTANT:** Rename the file to `goodreads_library_export.csv`. Put this file into the `utils` folder.
 
 ### Step 2: Your Cozy Reading Nook (Installation)
 
@@ -52,7 +52,37 @@ Let's prepare everything for a cozy programming afternoon.
     pip install -r requirements.txt
     ```
 
-### Step 3: Summon the Book Spirit (Local LLM with Ollama)
+### Step 3: Investigation Mode !ON! (API KEY)
+
+To include book blurbs, the script needs to connect to the Google Books database. You'll need a free API key for this. You need to run this script once in the beginning(or when you want to add an updated goodreads export)
+
+1.  Go to the [Google Cloud Console](https://console.cloud.google.com/apis/dashboard).
+2.  If you don't have one, create a new project (e.g., "My Book Project").
+3.  In the main dashboard, click **"+ ENABLE APIS AND SERVICES"**.
+4.  Search for **"Google Books API"** and click on it.
+5.  Click the **"Enable"** button.
+6.  Go to the "Credentials" tab on the left-hand side.
+7.  Click **"+ CREATE CREDENTIALS"** at the top and select **"API key"**.
+8.  A window will pop up with your new key. **Copy this key**—you'll need it in the next step.
+9.  Inside the `utils` folder, create a new file named exactly `.env`
+    Open this new `.env` file and add the following line, pasting the API key you copied from step 8:
+
+        ```ini
+        GOOGLE_BOOKS_API_KEY="YOUR_API_KEY_GOES_HERE"
+        ```
+        * **Security Tip:** If you are using Git, add `.env` to your `.gitignore` file to keep your API key private.
+
+10. Open your terminal and make sure you are in the utils project folder.
+11. Run the script:
+    ```bash
+    python get_blurbs_env.py
+    ```
+
+The script will start! It will find your CSV and `.env` files inside the `utils` folder. You will see it process each book one by one in the terminal.
+
+When it's finished, a new file named `goodreads_with_blurbs.csv` will be saved in your utils project folder. This file will have all your original data plus a new "Blurb" column.
+
+### Step 4: Summon the Book Spirit (Local LLM with Ollama)
 
 Our app needs a clever mind in the background. We use Ollama for this – it's super easy\!
 
@@ -63,7 +93,7 @@ Our app needs a clever mind in the background. We use Ollama for this – it's s
     ollama pull nomic-embed-text
     ```
 
-### Step 4: The Grand Inauguration Ritual (Process Data)
+### Step 5: The Grand Inauguration Ritual (Process Data)
 
 Before we can start the app, we need to teach the oracle about all your books. This step reads your Goodreads file and transforms it into magical knowledge.
 **Run this command only once (or whenever you have updated your Goodreads list):**
@@ -74,7 +104,7 @@ python ingest.py
 
 Be patient, this is where the real alchemy happens\! ✨
 
-### Step 5: Open the Portal\! (Start the App)
+### Step 6: Open the Portal\! (Start the App)
 
 Everything is ready\! Time to unleash the magic.
 
